@@ -21,7 +21,7 @@ export default function Hero() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Hafiz Amrullah</h2>
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto md:mx-0 mb-8">
-            "We create modern and user-friendly web applications to address real-world challenges."
+            {"We create modern and user-friendly web applications to address real-world challenges."}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 w-full sm:w-auto">
             <a
