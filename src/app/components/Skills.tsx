@@ -26,7 +26,7 @@ export default function Skills() {
     <section id="skills" className="py-16 md:py-20">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-12">
-          Teknologi yang Saya Kuasai
+          Skills
         </h2>
         <motion.div
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 md:gap-12"

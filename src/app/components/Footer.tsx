@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="flex gap-4">
           {/* Ganti "#" dengan URL profil Anda */}
           <a 
-            href="https://github.com/username-anda" 
+            href="https://github.com/hafiz-dev1" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="text-gray-500 hover:text-black dark:hover:text-white"
@@ -20,7 +20,7 @@ export default function Footer() {
             <Github size={24} />
           </a>
           <a 
-            href="https://linkedin.com/in/username-anda" 
+            href="https://linkedin.com/in/hafizamrullah" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="text-gray-500 hover:text-black dark:hover:text-white"

@@ -9,7 +9,7 @@ export default function Hero() {
   const imageHeight = 300; // Definisikan tinggi gambar di sini
 
   return (
-    <section className="text-center md:text-left py-16 md:py-20">
+    <section id="hero" className="text-center md:text-left py-16 md:py-20">
       <div className="container mx-auto px-4 flex flex-col-reverse md:flex-row items-center justify-between gap-12">
         
         {/* Kolom Teks (Tidak Berubah) */}
@@ -21,20 +21,24 @@ export default function Hero() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Hafiz Amrullah</h2>
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto md:mx-0 mb-8">
-            Seorang Full-Stack Developer yang bersemangat dalam membangun aplikasi web modern dan intuitif yang memecahkan masalah nyata.
+            "We create modern and user-friendly web applications to address real-world challenges."
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 w-full sm:w-auto">
             <a
               href="#contact"
-              className="bg-black text-white dark:bg-white dark:text-black font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 w-full sm:w-auto text-center"
+              className="bg-black text-white dark:bg-white dark:text-black font-semibold py-2 px-6 rounded-lg 
+                        hover:bg-gray-800 w-full sm:w-auto text-center 
+                        shadow-md hover:shadow-xl transition"
             >
-              Hubungi Saya
+              Contact Us
             </a>
             <a
               href="#projects"
-              className="bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 font-semibold py-2 px-6 rounded-lg border border-gray-300 hover:bg-gray-100 w-full sm:w-auto text-center"
+              className="bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 font-semibold py-2 px-6 rounded-lg 
+                        border border-gray-300 hover:bg-gray-100 w-full sm:w-auto text-center 
+                        shadow-md hover:shadow-xl transition"
             >
-              Lihat Proyek
+              My Projects
             </a>
           </div>
         </motion.div>

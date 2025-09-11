@@ -42,7 +42,7 @@ export default function Header({ activeSection }: HeaderProps) {
     >
       <div className="container mx-auto flex justify-between items-center px-4 py-4">
         <h1 className="text-xl font-bold">
-          <a href="#">MyPortfolio</a>
+          <a href="#">Portfolio</a>
         </h1>
         
         <nav className="hidden md:flex items-center gap-6">
