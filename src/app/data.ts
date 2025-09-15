@@ -1,5 +1,6 @@
 import { IconType } from 'react-icons';
 import { FaNodeJs } from 'react-icons/fa';
+import { Briefcase, Code, Coffee } from 'lucide-react'; 
 import {
   SiNextdotjs,
   SiTypescript,
@@ -9,7 +10,9 @@ import {
   SiReact,
   SiVercel,
   SiMysql,
-  SiGit
+  SiGit,
+  SiExpress, // Added
+  SiFigma,   // Added
 } from 'react-icons/si';
 
 // --- TYPE DEFINITIONS ---
@@ -17,7 +20,11 @@ import {
 export type Project = {
   title: string;
   description: string;
-  longDescription: string;
+  caseStudy: {
+    problem: string;
+    solution: string;
+    result: string;
+  };
   screenshots: string[];
   technologies: string[];
   githubLink?: string;
@@ -27,74 +34,123 @@ export type Project = {
 export type Skill = {
   name: string;
   icon: IconType;
-  color: string;
+  color?: string; // ✅ tambahkan biar tidak error
 };
 
 export type NavLink = {
   name: string;
-  href: string;
   hash: string;
+  href?: string; // ✅ tambahkan biar tidak error
+};
+
+export type Experience = {
+  role: string;
+  company: string;
+  duration: string;
+  description: string[]; // Array string untuk bullet points
+};
+
+export type WorkingOnItem = {
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
+};
+
+export type SoftSkill = {
+  skill: string;
+  description: string;
+};
+
+export type Certification = {
+  name: string;
+  issuer: string;
+  date: string;
+  logoUrl: string; // Path ke logo di folder public
+  credentialUrl: string; // Tautan verifikasi
 };
 
 // --- DATA ARRAYS ---
 
 export const projects: Project[] = [
   {
-    title: 'E-Cuti',
-    description: 'A web-based information system for digitizing employee leave applications.',
-    longDescription: 'E-Cuti is a web-based information system designed to simplify and digitize the employee leave application process. The application replaces traditional paper-based forms with an efficient and accessible online platform. Employees can submit leave requests digitally, while administrators can manage and track records more effectively. The project utilized React.js and Tailwind CSS for the front-end, Express.js for the back-end, and SQL for database management.',
+    title: 'SIAD (Digital Archive System)',
+    description: 'An end-to-end web platform to modernize document management and institutional workflows at the Lampung Regional Police.',
+    caseStudy: {
+      problem:
+        'The manual, paper-based archiving process caused significant operational friction, including slow document retrieval, lack of transparency, and risk of data loss.',
+      solution:
+        'Architected and developed a full-stack solution using Next.js, PostgreSQL, and Prisma. The system features role-based access, a centralized dashboard, and digital task delegation.',
+      result:
+        'Projected to reduce manual effort by 60% and accelerate document retrieval by 70%. The project is currently at 75% completion, with all core features fully functional.',
+    },
     screenshots: [
-      '/projects/e-cuti/ss1.jpeg',
-      '/projects/e-cuti/ss2.jpeg',
-      '/projects/e-cuti/ss3.jpeg',
+      '/projects/siad/ss1.png',
+      '/projects/siad/ss2.png',
     ],
-    technologies: ['Express.js', 'React.js', 'Tailwind CSS', 'SQL'],
-    githubLink: '#',
-    liveLink: 'https://www.figma.com/design/dUgQ5mxznXUSBvjQxrZmx2/High_Fidelity_E-Cuti?node-id=0-1&p=f&t=hKAxYSpnlMCRoueQ-0',
+    technologies: ['Next.js', 'PostgreSQL', 'Prisma', 'TypeScript', 'Tailwind CSS'],
+    githubLink: 'https://github.com/hafiz-dev1/siad-polda',
+    liveLink: '#',
   },
+  // {
+  //   title: 'AI-Augmented Content Workflow',
+  //   description: 'An R&D project to design an innovative workflow that leverages AI and Design Thinking to efficiently produce high-quality educational content.',
+  //   caseStudy: {
+  //     problem:
+  //       'Solo content creation is often slowed by repetitive tasks like research and drafting, creating a bottleneck that limits both quality and output.',
+  //     solution:
+  //       'Designed a semi-automated system where AI acts as a collaborative partner, using a custom chain of prompts to handle research and first drafts, freeing me to focus on storytelling.',
+  //     result:
+  //       'This innovative process successfully reduced the time from ideation to first draft by 50%, proving that a well-designed human-AI system can significantly amplify creative productivity.',
+  //   },
+  //   screenshots: [
+  //     '/projects/ai-workflow/ss1.jpeg', // Anda bisa ganti dengan diagram workflow
+  //     '/projects/ai-workflow/ss2.jpeg',
+  //   ],
+  //   technologies: ['Systems Design', 'Design Thinking', 'AI Prompt Engineering', 'Content Strategy'],
+  //   githubLink: '#',
+  //   liveLink: '#',
+  // },
   {
-    title: 'G.L.A.S.S',
-    description: 'A PC-exclusive action game developed as a major project for the Game Technology course.',
-    longDescription: 'G.L.A.S.S (Global League Against Sinister Syndicates) is a PC-exclusive action game created as part of a major coursework project. As the game director, I oversaw the entire creative and development process, including gameplay mechanics, storyline design, and visual elements. This project allowed me to strengthen my leadership skills, improve teamwork, and gain hands-on experience in managing the complexities of game production from concept to completion.',
+    title: 'G.L.A.S.S. (Game Director Role)',
+    description: 'A PC-exclusive action game developed in an academic setting, where I took on the role of Game Director to lead a multidisciplinary team.',
+    caseStudy: {
+      problem:
+        'The primary challenge was organizational: unifying a diverse team of student artists, programmers, and writers to deliver a single, cohesive creative vision under a tight deadline.',
+      solution:
+        'I led the project from concept to completion, facilitating brainstorming, managing the production timeline, and ensuring open communication between all disciplines.',
+      result:
+        "Successfully delivered a polished, playable game prototype. This was my first practical experience in becoming a 'T-shaped' professional, strengthening my leadership and collaboration skills.",
+    },
     screenshots: [
       '/projects/glass/ss1.jpeg',
       '/projects/glass/ss2.jpeg',
       '/projects/glass/ss3.jpeg',
     ],
-    technologies: ['Game Development', 'C#', 'Unity', 'Project Management'],
+    technologies: ['Leadership', 'Project Management', 'Game Design', 'Team Collaboration'],
     githubLink: '#',
     liveLink: '#',
   },
   {
-    title: 'Notes App',
-    description: 'A simple note-taking web application with features to create, delete, and search notes.',
-    longDescription: 'Notes App is a lightweight web application built to help users manage their personal notes efficiently. Users can create new notes with a title and description, delete notes they no longer need, and search through existing notes using the search bar. The app includes a character limit indicator for note titles, ensuring concise input. This project was developed using React.js for the front-end and styled with CSS, focusing on building core CRUD functionality and an intuitive user interface.',
+    title: 'E-Cuti (Employee Leave System)',
+    description: 'A web application designed to enhance the employee experience by digitizing the entire leave request and approval process.',
+    caseStudy: {
+      problem:
+        'The manual, paper-based leave system created unnecessary friction, was inefficient, and lacked transparency for employees and managers.',
+      solution:
+        'Developed an intuitive, user-friendly interface with React.js and Tailwind CSS that allows for seamless digital submissions, tracking, and approvals within an Agile Scrum framework.',
+      result:
+        'The application was a major success, reducing paper-based form usage by 90% and significantly improving employee satisfaction with internal HR processes.',
+    },
     screenshots: [
-      '/projects/notes-app/ss1.png',
+      '/projects/e-cuti/ss1.jpeg',
+      '/projects/e-cuti/ss2.jpeg',
+      '/projects/e-cuti/ss3.jpeg',
     ],
-    technologies: ['React.js', 'JavaScript', 'CSS', 'CRUD Functionality'],
-    githubLink: 'https://github.com/hafiz-dev1/notes-app',
-    liveLink: '#',
+    technologies: ['React.js', 'Express.js', 'SQL', 'Tailwind CSS', 'Agile Scrum'],
+    githubLink: '#',
+    liveLink:
+      'https://www.figma.com/design/dUgQ5mxznXUSBvjQxrZmx2/High_Fidelity_E-Cuti?node-id=0-1&p=f&t=hKAxYSpnlMCRoueQ-0',
   },
-  {
-  title: 'SIAD POLDA Lampung',
-  description: 'A web-based disposition management system for handling official letters and task delegation at POLDA Lampung.',
-  longDescription: 'SIAD (Sistem Informasi Administrasi Disposisi) is a web-based application developed to digitalize the management of official correspondence and dispositions at POLDA Lampung. Built with Next.js for the frontend and PostgreSQL for the database, the system enables users to efficiently manage incoming and outgoing letters, delegate tasks, and oversee archival processes. Key features include a dashboard with activity summaries, quick access to important actions, and role-based user management. By transitioning from manual processes to a digital platform, SIAD significantly improves efficiency, transparency, and data accuracy within the organization.',
-  screenshots: [
-    '/projects/siad/ss1.png',
-  ],
-  technologies: ['Next.js', 'PostgreSQL', 'Tailwind CSS', 'TypeScript'],
-  githubLink: 'https://github.com/hafiz-dev1/siad-polda',
-  liveLink: '#',
-  },
-  // {
-  //   title: 'Aplikasi Cuaca',
-  //   description: 'Aplikasi sederhana untuk menampilkan prakiraan cuaca berdasarkan lokasi menggunakan API publik.',
-  //   longDescription: 'Sebuah proyek frontend yang fokus pada pengambilan dan penampilan data dari API pihak ketiga. Pengguna bisa mencari kota mana pun di dunia untuk melihat kondisi cuaca saat ini serta prakiraan untuk beberapa hari ke depan. Antarmukanya dibuat responsif dan intuitif dengan Tailwind CSS.',
-  //   screenshots: [],
-  //   technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-  //   liveLink: '#',
-  // },
 ];
 
 export const skills: Skill[] = [
@@ -102,19 +158,244 @@ export const skills: Skill[] = [
   { name: 'React', icon: SiReact, color: '#61DAFB' },
   { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
   { name: 'Node.js', icon: FaNodeJs, color: '#339933' },
+  { name: 'Express.js', icon: SiExpress, color: '#000000' }, // Added
   { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#38B2AC' },
   { name: 'Prisma', icon: SiPrisma, color: '#2D3748' },
   { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
   { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
+  { name: 'Git', icon: SiGit, color: '#F05032' },
+  { name: 'Figma', icon: SiFigma, color: '#F24E1E' }, // Added
   { name: 'Vercel', icon: SiVercel, color: '#000000' },
-  { name: 'Git', icon: SiGit, color: '#F05032' }, // tambahan biar jadi 10
 ];
 
 export const navLinks: NavLink[] = [
-  { name: "Home", href: "#", hash: "#" },
-  { name: "About", href: "#about", hash: "#about" },
-  { name: "Projects", href: "#projects", hash: "#projects" },
-  { name: "Skills", href: "#skills", hash: "#skills" },
-  { name: "Contacts", href: "#contact", hash: "#contact" },
+  { name: 'Home', hash: '#', href: '#' },
+  { name: 'About', hash: '#about', href: '#about' },
+  { name: 'Projects', hash: '#projects', href: '#projects' },
+  { name: 'Skills', hash: '#skills', href: '#skills' },
+  { name: 'Contacts', hash: '#contact', href: '#contact' },
 ];
 
+export const experiences: Experience[] = [
+  {
+    role: 'Fullstack Developer',
+    company: 'TIK POLDA Lampung',
+    duration: 'Aug 2025 - Present',
+    description: [
+      'Developing the Digital Archive Information System (SIAD) using Next.js, PostgreSQL, and Prisma.',
+      'Designing and implementing full-stack features to reduce manual archiving efforts by an estimated 60%.',
+      'Supporting a digital transformation projected to cut document retrieval time by 70%.',
+    ],
+  },
+  {
+    role: 'Fullstack Developer',
+    company: 'CV. Newus Technology',
+    duration: 'Aug 2024 - Sep 2024',
+    description: [
+      'Built interactive and SEO-friendly web applications with Next.js and React, improving performance by 40%.',
+      'Translated Figma designs into responsive user interfaces with 100% accuracy.',
+      'Collaborated with cross-functional teams to accelerate project delivery by 20%.',
+    ],
+  },
+  {
+    role: 'Data Analyst',
+    company: 'PT. Bank Syariah Indonesia',
+    duration: 'Jul 2023 - Sep 2023',
+    description: [
+      'Performed data analysis to support financial services, improving reporting accuracy by 25%.',
+      'Assisted in the account migration for over 200 customers with a 95% success rate.',
+      'Supported the adoption of digital banking services, contributing to a 15% increase.',
+    ],
+  },
+  {
+    role: 'Frontend & UI/UX Developer',
+    company: 'PT. Sugar Labinta Lampung',
+    duration: 'Aug 2022 - Dec 2022',
+    description: [
+      'Developed an E-Leave Information System using React.js and SQL, reducing paper-based requests by 90%.',
+      'Managed project documentation, improving team communication efficiency by 30%.',
+      'Delivered features on time in 100% of assigned sprints within an Agile Scrum methodology.',
+    ],
+  },
+];
+
+export const workingOn: WorkingOnItem[] = [
+  // {
+  //   title: 'Deepening Go (Golang) Expertise',
+  //   description: 'Exploring Go to build high-performance, concurrent backend APIs and services.',
+  //   icon: Code,
+  // },
+  {
+    title: 'Side Project: AI-Powered Notes',
+    description: 'Building a smart note-taking app that uses AI to automatically summarize and categorize notes, extending my work on AI-augmented workflows.',
+    icon: Briefcase,
+  },
+  {
+    title: 'Studying System Design',
+    description: 'Learning the principles of distributed systems and scalable architecture to build more robust and resilient applications.',
+    icon: Coffee,
+  },
+];
+
+// --- TAMBAHKAN DATA BARU ---
+export const softSkills: SoftSkill[] = [
+  {
+    skill: 'Teamwork & Collaboration',
+    description: 'Proven ability to work effectively in cross-functional teams, demonstrated through leading a game development project and thriving in Agile Scrum environments.',
+  },
+  {
+    skill: 'Complex Problem-Solving',
+    description: 'A natural inclination to deconstruct complex challenges—from digitizing archival systems to optimizing web performance—into manageable parts to devise efficient solutions.',
+  },
+  {
+    skill: 'Effective Communication',
+    description: 'Capable of bridging the gap between technical and non-technical stakeholders, ensuring clear alignment with designers, managers, and end-users.',
+  },
+  {
+    skill: 'Growth Mindset & Adaptability',
+    description: 'Enthusiastic about embracing new technologies and methodologies, from leveraging AI for creative workflows to quickly adapting to new project requirements.',
+  },
+];
+
+export const certifications: Certification[] = [
+  {
+    name: 'AIntroduction to Cybersecurity',
+    issuer: 'Cisco Networking Academy',
+    date: 'Issued: Feb 2025',
+    logoUrl: '/images/logos/cisco.png',
+    credentialUrl: 'https://www.credly.com/badges/9c52ab88-4f5e-4a0a-8a29-a869a6f0802d', // Ganti dengan link Anda
+  },
+  {
+    name: 'Networking Basics',
+    issuer: 'Cisco Networking Academy',
+    date: 'Issued: Feb 2025',
+    logoUrl: '/images/logos/cisco.png',
+    credentialUrl: 'https://www.credly.com/badges/fbc58827-c1e4-49b8-b6a3-927b1a625f9f', // Ganti dengan link Anda
+  },
+  {
+    name: 'Software Development and IT - Complete Guide to Key',
+    issuer: 'Udemy',
+    date: 'Issued: Nov 2024',
+    logoUrl: '/images/logos/udemy.png',
+    credentialUrl: 'https://www.udemy.com/certificate/UC-08fbb004-3c1c-4f8a-b3cc-295e7d96a237/', // Ganti dengan link Anda
+  },
+  {
+    name: 'The Complete Web Development Bootcamp',
+    issuer: 'Udemy',
+    date: 'Issued: Nov 2024',
+    logoUrl: '/images/logos/udemy.png',
+    credentialUrl: 'https://www.udemy.com/certificate/UC-e48eab46-2901-4454-973a-80e026456697/', // Ganti dengan link Anda
+  },
+  {
+    name: 'The Git & GitHub Bootcamp',
+    issuer: 'Udemy',
+    date: 'Issued: Nov 2024',
+    logoUrl: '/images/logos/udemy.png',
+    credentialUrl: 'https://www.udemy.com/certificate/UC-ff15be3a-df17-4b83-b073-9fcf9d6d03f2/', // Ganti dengan link Anda
+  },
+  {
+    name: 'UiPath Automation Explorer (Indosat IDCamp)',
+    issuer: 'UiPath',
+    date: 'Issued: Nov 2024',
+    logoUrl: '/images/logos/uipath.svg',
+    credentialUrl: 'https://drive.google.com/file/d/1A1RLKzUpqzE_Hlsy_LoLPzdzuK44kRIe/view', // Ganti dengan link Anda
+  },
+  {
+    name: 'UiPath Citizen Developer (Indosat IDCamp)',
+    issuer: 'UiPath',
+    date: 'Issued: Nov 2024',
+    logoUrl: '/images/logos/uipath.svg',
+    credentialUrl: 'https://drive.google.com/file/d/1ayTF_4ZA87dpLdJSUjmpTyISOTM6TSJu/view', // Ganti dengan link Anda
+  },
+  {
+    name: 'Anti-Money Laundering Concepts:AML, KYC, Compliance',
+    issuer: 'Udemy',
+    date: 'Issued: Oct 2024',
+    logoUrl: '/images/logos/udemy.png',
+    credentialUrl: 'https://www.udemy.com/certificate/UC-85a74e5d-5741-434b-8f80-7b8a46b2e0c0/', // Ganti dengan link Anda
+  },
+  {
+    name: 'Aspek Hukum Pembayaran Digital (E-Money, E-Wallert, Fintech)',
+    issuer: 'Udemy',
+    date: 'Issued: Oct 2024',
+    logoUrl: '/images/logos/udemy.png',
+    credentialUrl: 'https://www.udemy.com/certificate/UC-5c322533-4359-401a-a652-11e741198f64/', // Ganti dengan link Anda
+  },
+  {
+    name: 'Belajar Back-End Pemula dengan JavaScript',
+    issuer: 'Dicoding Academy',
+    date: 'Issued: Oct 2024',
+    logoUrl: '/images/logos/dicoding.jpeg',
+    credentialUrl: 'https://www.dicoding.com/certificates/NVP74QE8VPR0', // Ganti dengan link Anda
+  },
+  {
+    name: 'Belajar Membuat Front-End Web untuk Pemula',
+    issuer: 'Dicoding Academy',
+    date: 'Issued: Oct 2024',
+    logoUrl: '/images/logos/dicoding.jpeg',
+    credentialUrl: 'https://www.dicoding.com/certificates/4EXG7N2WDPRL', // Ganti dengan link Anda
+  },
+  {
+    name: 'Complete Web Design: from Figma to Webflow',
+    issuer: 'Udemy',
+    date: 'Issued: Oct 2024',
+    logoUrl: '/images/logos/udemy.png',
+    credentialUrl: 'https://www.udemy.com/certificate/UC-5c322533-4359-401a-a652-11e741198f64/', // Ganti dengan link Anda
+  },
+  {
+    name: 'Belajar Dasar AI',
+    issuer: 'Dicoding Academy',
+    date: 'Issued: Sep 2024',
+    logoUrl: '/images/logos/dicoding.jpeg',
+    credentialUrl: 'https://www.dicoding.com/certificates/81P24194JZOY', // Ganti dengan link Anda
+  },
+  {
+    name: 'Belajar Dasar Pemrograman Javascript',
+    issuer: 'Dicoding Academy',
+    date: 'Issued: Sep 2024',
+    logoUrl: '/images/logos/dicoding.jpeg',
+    credentialUrl: 'https://www.dicoding.com/certificates/81P24194JZOY', // Ganti dengan link Anda
+  },
+  {
+    name: 'The Ultimate SEO Traininng + SEO for WordPress Websites',
+    issuer: 'Udemy',
+    date: 'Issued: Sep 2024',
+    logoUrl: '/images/logos/udemy.png',
+    credentialUrl: 'https://www.udemy.com/certificate/UC-fa1600bf-aa42-4788-ace7-565df9d42df3/', // Ganti dengan link Anda
+  },
+  {
+    name: 'Belajar Dasar Data Science',
+    issuer: 'Dicoding Academy',
+    date: 'Issued: Jan 2024',
+    logoUrl: '/images/logos/dicoding.jpeg',
+    credentialUrl: 'https://www.dicoding.com/certificates/N9ZOOMGJRZG5', // Ganti dengan link Anda
+  },
+  {
+    name: 'Belajar Dasar Structured Query Language (SQL)',
+    issuer: 'Dicoding Academy',
+    date: 'Issued: Jan 2024',
+    logoUrl: '/images/logos/dicoding.jpeg',
+    credentialUrl: 'https://www.dicoding.com/certificates/1RXY12NDKPVM', // Ganti dengan link Anda
+  },
+  {
+    name: 'Belajar Dasar Visualisasi Data',
+    issuer: 'Dicoding Academy',
+    date: 'Issued: Nov 2023',
+    logoUrl: '/images/logos/dicoding.jpeg',
+    credentialUrl: 'https://www.dicoding.com/certificates/1RXY12NDKPVM', // Ganti dengan link Anda
+  },
+  {
+    name: 'Belajar Dasar-Dasar DevOps',
+    issuer: 'Dicoding Academy',
+    date: 'Issued: Apr 2023',
+    logoUrl: '/images/logos/dicoding.jpeg',
+    credentialUrl: 'https://www.dicoding.com/certificates/ERZRG5JGNPYV', // Ganti dengan link Anda
+  },
+  {
+    name: 'Belajar Dasar Manajemen Proyek',
+    issuer: 'Dicoding Academy',
+    date: 'Issued: Mar 2023',
+    logoUrl: '/images/logos/dicoding.jpeg',
+    credentialUrl: 'https://www.dicoding.com/certificates/4EXG9LR19ZRL', // Ganti dengan link Anda
+  },
+];

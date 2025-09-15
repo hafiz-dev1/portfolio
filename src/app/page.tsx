@@ -6,8 +6,11 @@ import { useInView } from 'react-intersection-observer';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import AboutMe from './components/AboutMe';
+import Experience from './components/Experience';
+import Certifications from './components/Certifications'; // <-- Impor
 import Skills from './components/Skills';
 import ProjectSection from './components/ProjectSection';
+import WorkingOn from './components/WorkingOn';  
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -39,11 +42,20 @@ export default function Home() {
         <div ref={aboutRef}>
           <AboutMe />
         </div>
+        <div>
+          <Experience />
+        </div>
+        <div>
+          <Certifications />
+        </div>
         <div ref={skillsRef}>
           <Skills />
         </div>
         <div ref={projectsRef}>
           <ProjectSection />
+        </div>
+        <div>
+          <WorkingOn />
         </div>
         <div ref={contactRef}>
           <Contact />
