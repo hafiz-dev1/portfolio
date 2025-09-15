@@ -1,6 +1,7 @@
 import { IconType } from 'react-icons';
 import { FaNodeJs } from 'react-icons/fa';
-import { Briefcase, Code, Coffee } from 'lucide-react'; 
+import { Briefcase, Coffee } from 'lucide-react'; 
+// import { Briefcase, Code, Coffee } from 'lucide-react'; 
 import {
   SiNextdotjs,
   SiTypescript,

@@ -18,10 +18,10 @@ export default function AboutMe() {
         </h2>
         <div className="max-w-3xl mx-auto text-center md:text-left">
           <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-            Hi, I'm Hafiz—a full-stack developer from Indonesia with a passion for building user-centric and impactful web applications. My philosophy is that technology is a tool for empowerment. I focus on creating meaningful solutions that solve real-world problems and simplify complexity for the end-user.
+            Hi, I&apos;m Hafiz—a full-stack developer from Indonesia with a passion for building user-centric and impactful web applications. My philosophy is that technology is a tool for empowerment. I focus on creating meaningful solutions that solve real-world problems and simplify complexity for the end-user.
           </p>
           <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-            Whether I'm architecting a backend system or designing an intuitive user interface, my goal is always the same: to transform ideas into functional, elegant, and impactful digital experiences. Driven by a deep sense of curiosity, I am a committed lifelong learner, constantly exploring new challenges and technologies to grow.
+            Whether I&apos;m architecting a backend system or designing an intuitive user interface, my goal is always the same: to transform ideas into functional, elegant, and impactful digital experiences. Driven by a deep sense of curiosity, I am a committed lifelong learner, constantly exploring new challenges and technologies to grow.
           </p>
         </div>
       </motion.div>
