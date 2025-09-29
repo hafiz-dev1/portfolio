@@ -85,11 +85,11 @@ export const projects: Project[] = [
         'Projected to reduce manual effort by 60% and accelerate document retrieval by 70%. The project is currently at 75% completion, with all core features fully functional.',
     },
     screenshots: [
-      '/projects/siad/ss1.png',
-      '/projects/siad/ss2.png',
+      '/projects/siap/ss1.png',
+      '/projects/siap/ss2.png',
     ],
     technologies: ['Next.js', 'PostgreSQL', 'Prisma', 'TypeScript', 'Tailwind CSS'],
-    githubLink: 'https://github.com/hafiz-dev1/siad-polda',
+    githubLink: 'https://github.com/hafiz-dev1/siap-tik-polda',
     liveLink: '#',
   },
   // {
