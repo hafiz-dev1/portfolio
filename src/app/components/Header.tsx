@@ -40,9 +40,9 @@ export default function Header({ activeSection }: HeaderProps) {
         'bg-transparent': !isScrolled,
       })}
     >
-      <div className="container mx-auto flex justify-between items-center px-4 py-4">
-        <h1 className="text-xl font-bold">
-          <a href="#">Portfolio</a>
+      <div className="container mx-auto flex justify-center items-center px-4 py-4 relative">
+        <h1 className="text-xl font-bold absolute left-4">
+          <a href="#">PORTFOLIO</a>
         </h1>
         
         <nav className="hidden md:flex items-center gap-6">
@@ -63,13 +63,32 @@ export default function Header({ activeSection }: HeaderProps) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 absolute right-4">
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-110 active:scale-95 active:rotate-180"
             aria-label="Toggle theme"
           >
-            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+            <div className="relative w-5 h-5">
+              <Sun 
+                size={20} 
+                className={clsx(
+                  'absolute inset-0 transition-all duration-700 ease-in-out',
+                  theme === "dark" 
+                    ? 'rotate-180 scale-0 opacity-0' 
+                    : 'rotate-0 scale-100 opacity-100'
+                )}
+              />
+              <Moon 
+                size={20} 
+                className={clsx(
+                  'absolute inset-0 transition-all duration-700 ease-in-out',
+                  theme === "dark" 
+                    ? 'rotate-0 scale-100 opacity-100' 
+                    : '-rotate-180 scale-0 opacity-0'
+                )}
+              />
+            </div>
           </button>
         </div>
       </div>

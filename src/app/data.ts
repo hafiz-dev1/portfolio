@@ -172,8 +172,8 @@ export const skills: Skill[] = [
 export const navLinks: NavLink[] = [
   { name: 'Home', hash: '#', href: '#' },
   { name: 'About', hash: '#about', href: '#about' },
-  { name: 'Projects', hash: '#projects', href: '#projects' },
   { name: 'Skills', hash: '#skills', href: '#skills' },
+  { name: 'Projects', hash: '#projects', href: '#projects' },
   { name: 'Contacts', hash: '#contact', href: '#contact' },
 ];
 

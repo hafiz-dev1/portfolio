@@ -15,9 +15,10 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('#');
 
   // Buat satu hook 'useInView' untuk setiap seksi
+  const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.5 });
   const { ref: aboutRef, inView: aboutInView } = useInView({ threshold: 0.5 });
   const { ref: skillsRef, inView: skillsInView } = useInView({ threshold: 0.5 });
   const { ref: projectsRef, inView: projectsInView } = useInView({ threshold: 0.5 });
@@ -25,18 +26,23 @@ export default function Home() {
 
   // Gunakan useEffect untuk memantau 'inView' dan update state
   useEffect(() => {
-    if (aboutInView) setActiveSection('#about');
-    if (skillsInView) setActiveSection('#skills');
-    if (projectsInView) setActiveSection('#projects');
-    if (contactInView) setActiveSection('#contact');
-  }, [aboutInView, skillsInView, projectsInView, contactInView]);
+    if (heroInView) setActiveSection('#');
+    else if (aboutInView) setActiveSection('#about');
+    else if (skillsInView) setActiveSection('#skills');
+    else if (projectsInView) setActiveSection('#projects');
+    else if (contactInView) setActiveSection('#contact');
+  }, [heroInView, aboutInView, skillsInView, projectsInView, contactInView]);
 
   return (
-    <div className="max-w-7xl mx-auto">
-      {/* Berikan state ke Header */}
+    <>
+      {/* Header is now full-width */}
       <Header activeSection={activeSection} />
-      <main>
-        <Hero />
+      
+      {/* Main content constrained to max-w-7xl */}
+      <main className="max-w-7xl mx-auto">
+        <div ref={heroRef}>
+          <Hero />
+        </div>
         
         {/* Lampirkan ref ke setiap komponen seksi */}
         <div ref={aboutRef}>
@@ -60,9 +66,10 @@ export default function Home() {
         <div ref={contactRef}>
           <Contact />
         </div>
-
       </main>
+      
+      {/* Footer is now full-width */}
       <Footer />
-    </div>
+    </>
   );
 }
