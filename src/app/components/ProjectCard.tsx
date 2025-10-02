@@ -93,21 +93,21 @@ function ProjectCard({ project }: ProjectCardProps) {
               <div>
                 <h4 className="font-bold text-lg text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
                   <Target className="w-5 h-5 text-blue-500" />
-                  The Problem
+                  Problem
                 </h4>
                 <p>{project.caseStudy.problem}</p>
               </div>
               <div>
                 <h4 className="font-bold text-lg text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
                   <Wrench className="w-5 h-5 text-green-500" />
-                  The Solution
+                  Solution
                 </h4>
                 <p>{project.caseStudy.solution}</p>
               </div>
               <div>
                 <h4 className="font-bold text-lg text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
                   <BarChart className="w-5 h-5 text-purple-500" />
-                  The Impact
+                  Impacts
                 </h4>
                 <p>{project.caseStudy.result}</p>
               </div>
