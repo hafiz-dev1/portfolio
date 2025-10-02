@@ -12,6 +12,12 @@ import {
   SiVercel,
   SiMysql,
   SiGit,
+  SiHtml5,
+  SiCss3,
+  SiPython,
+  SiNotion,
+  SiGithub,
+  SiPostman,
   SiExpress, // Added
   SiFigma,   // Added
 } from 'react-icons/si';
@@ -155,18 +161,24 @@ export const projects: Project[] = [
 ];
 
 export const skills: Skill[] = [
-  { name: 'Next.js', icon: SiNextdotjs, color: '#000000' },
-  { name: 'React', icon: SiReact, color: '#61DAFB' },
+  { name: 'HTML', icon: SiHtml5, color: '#E34F26' },
+  { name: 'CSS', icon: SiCss3, color: '#1572B6' },
   { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+  { name: 'React', icon: SiReact, color: '#61DAFB' },
+  { name: 'Next.js', icon: SiNextdotjs, color: '#000000' },
+  { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#38B2AC' },
   { name: 'Node.js', icon: FaNodeJs, color: '#339933' },
   { name: 'Express.js', icon: SiExpress, color: '#000000' }, // Added
-  { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#38B2AC' },
+  { name: 'Python', icon: SiPython, color: '#3776AB' },
   { name: 'Prisma', icon: SiPrisma, color: '#2D3748' },
   { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
   { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
   { name: 'Git', icon: SiGit, color: '#F05032' },
-  { name: 'Figma', icon: SiFigma, color: '#F24E1E' }, // Added
+  { name: 'GitHub', icon: SiGithub, color: '#181717' },
+  { name: 'Postman', icon: SiPostman, color: '#FF6C37' },
   { name: 'Vercel', icon: SiVercel, color: '#000000' },
+  { name: 'Figma', icon: SiFigma, color: '#F24E1E' }, // Added
+  { name: 'Notion', icon: SiNotion, color: '#000000' },
 ];
 
 export const navLinks: NavLink[] = [

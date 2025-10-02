@@ -1,5 +1,11 @@
 /* src/app/globals */
 
+/* 
+ * Tailwind CSS v4 Configuration
+ * Note: @custom-variant, @theme, and @apply are Tailwind CSS v4 directives
+ * These may show warnings in some editors but are valid syntax
+ */
+
 @import "tailwindcss";
 
 @import "tw-animate-css";
@@ -158,13 +164,24 @@
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  
+  /* Enhanced smooth transitions for theme switching */
+  html,
+  body {
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   * {
-    transition-property: background-color, border-color, color, fill, stroke;
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 0.3s;
+  }
+  
+  /* Smoother transitions for specific elements */
+  button, a, input, textarea, select {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   /* Prevent transitions on page load */
@@ -312,4 +329,12 @@
 .dark .glass {
   background: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* View Transitions API support for smoother theme switching */
+@supports (view-transition-name: none) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.4s;
+  }
 }

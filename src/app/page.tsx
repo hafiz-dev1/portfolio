@@ -1,7 +1,7 @@
 // src/app/page.tsx
 "use client";
 
-import { useState, useEffect, useCallback, memo } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { useInView } from 'react-intersection-observer';
 import dynamic from 'next/dynamic';
 import Header from './components/Header';

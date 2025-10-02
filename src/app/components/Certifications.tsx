@@ -73,11 +73,12 @@ function Certifications() {
               href={cert.credentialUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left w-full gap-4 p-5 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-blue-500 group"
+              className="group flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left w-full gap-4 p-5 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-600 transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
+              whileHover={{ scale: 1.08, y: -6 }}
             >
               <div className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 relative mb-3 sm:mb-0">
                 <Image
