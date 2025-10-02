@@ -80,7 +80,7 @@ export type Certification = {
 
 export const projects: Project[] = [
   {
-    title: 'SIAD (Digital Archive System)',
+    title: 'SIAP (Digital Archive System)',
     description: 'An end-to-end web platform to modernize document management and institutional workflows at the Lampung Regional Police.',
     caseStudy: {
       problem:
