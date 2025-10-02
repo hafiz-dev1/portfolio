@@ -14,7 +14,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-8">
           {/* Social Links */}
-          <div className="flex gap-4">
+          {/* <div className="flex gap-4">
             <motion.a 
               href="https://github.com/hafiz-dev1" 
               target="_blank" 
@@ -37,7 +37,7 @@ export default function Footer() {
             >
               <Linkedin size={24} />
             </motion.a>
-          </div>
+          </div> */}
 
           {/* Copyright */}
           <div className="text-center">
@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
 
           {/* Scroll to top button */}
-          <motion.button
+          {/* <motion.button
             onClick={scrollToTop}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -61,7 +61,7 @@ export default function Footer() {
             aria-label="Scroll to top"
           >
             <ArrowUp size={20} />
-          </motion.button>
+          </motion.button> */}
         </div>
       </div>
     </footer>
