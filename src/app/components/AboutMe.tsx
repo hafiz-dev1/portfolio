@@ -68,7 +68,7 @@ function AboutMe() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                Hi, I&apos;m <span className="font-bold text-blue-600 dark:text-blue-400">Hafiz</span>—a full-stack developer from Indonesia with a passion for building user-centric and impactful web applications. My philosophy is that technology is a tool for empowerment. I focus on creating meaningful solutions that solve real-world problems and simplify complexity for the end-user.
+                Hi, I&apos;m <span className="font-bold text-blue-600 dark:text-blue-400">Hafiz</span>—a full-stack developer with a passion for building user-centric and impactful web applications. My philosophy is that technology is a tool for empowerment. I focus on creating meaningful solutions that solve real-world problems and simplify complexity for the end-user.
               </motion.p>
               
               <motion.p 
