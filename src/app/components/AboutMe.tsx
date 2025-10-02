@@ -60,7 +60,7 @@ function AboutMe() {
           </motion.p>
 
           <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 md:p-12 shadow-xl border border-gray-100 dark:border-gray-700">
-            <div className="space-y-6 text-center md:text-left">
+            <div className="space-y-6 text-center md:text-center">
               <motion.p 
                 className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
