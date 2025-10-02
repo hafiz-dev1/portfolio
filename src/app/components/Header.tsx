@@ -2,31 +2,42 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { Sun, Moon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Sun, Moon, Menu, X } from "lucide-react";
+import { useEffect, useState, useCallback, memo } from "react";
 import { navLinks } from "@/app/data";
-import clsx from 'clsx'; // Kita akan pakai clsx untuk menggabungkan class dengan mudah
+import clsx from 'clsx';
 
-// Props baru untuk Header
 interface HeaderProps {
   activeSection: string;
 }
 
-export default function Header({ activeSection }: HeaderProps) {
-  // ... (useState untuk mounted, theme, dan isScrolled tetap sama)
+function Header({ activeSection }: HeaderProps) {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  }, [theme, setTheme]);
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(prev => !prev);
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+  }, []);
 
   useEffect(() => {
     setMounted(true);
+    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   if (!mounted) {
@@ -35,45 +46,53 @@ export default function Header({ activeSection }: HeaderProps) {
 
   return (
     <header 
-      className={clsx(`sticky top-0 z-50 transition-all duration-300`, {
-        'bg-white/80 dark:bg-black/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800': isScrolled,
-        'bg-transparent': !isScrolled,
-      })}
+      className={clsx(
+        'sticky top-0 z-50 transition-all duration-300',
+        isScrolled 
+          ? 'bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm' 
+          : 'bg-transparent'
+      )}
     >
-      <div className="container mx-auto flex justify-center items-center px-4 py-4 relative">
-        <h1 className="text-xl font-bold absolute left-4">
-          <a href="#">PORTFOLIO</a>
+      <div className="container mx-auto flex justify-between items-center px-4 py-4">
+        {/* Logo */}
+        <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer">
+          <a href="#" aria-label="Portfolio Home">PORTFOLIO</a>
         </h1>
         
-        <nav className="hidden md:flex items-center gap-6">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.hash}
               className={clsx(
-                'font-medium transition-colors',
-                // Ini bagian yang diubah
+                'relative font-medium transition-all duration-300 hover:scale-110',
                 activeSection === link.hash 
-                  ? 'text-black dark:text-white' 
-                  : 'text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white'
+                  ? 'text-blue-600 dark:text-blue-400' 
+                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
               )}
             >
               {link.name}
+              {activeSection === link.hash && (
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400 rounded-full" />
+              )}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-4 absolute right-4">
+        {/* Actions */}
+        <div className="flex items-center gap-2">
+          {/* Theme Toggle */}
           <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-110 active:scale-95 active:rotate-180"
+            onClick={toggleTheme}
+            className="p-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 hover:scale-110 active:scale-95"
             aria-label="Toggle theme"
           >
             <div className="relative w-5 h-5">
               <Sun 
                 size={20} 
                 className={clsx(
-                  'absolute inset-0 transition-all duration-700 ease-in-out',
+                  'absolute inset-0 transition-all duration-500 ease-in-out',
                   theme === "dark" 
                     ? 'rotate-180 scale-0 opacity-0' 
                     : 'rotate-0 scale-100 opacity-100'
@@ -82,7 +101,7 @@ export default function Header({ activeSection }: HeaderProps) {
               <Moon 
                 size={20} 
                 className={clsx(
-                  'absolute inset-0 transition-all duration-700 ease-in-out',
+                  'absolute inset-0 transition-all duration-500 ease-in-out',
                   theme === "dark" 
                     ? 'rotate-0 scale-100 opacity-100' 
                     : '-rotate-180 scale-0 opacity-0'
@@ -90,8 +109,42 @@ export default function Header({ activeSection }: HeaderProps) {
               />
             </div>
           </button>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={toggleMobileMenu}
+            className="md:hidden p-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-black animate-fade-in">
+          <nav className="container mx-auto px-4 py-4 flex flex-col gap-3">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.hash}
+                onClick={closeMobileMenu}
+                className={clsx(
+                  'py-2 px-4 rounded-lg font-medium transition-all',
+                  activeSection === link.hash 
+                    ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' 
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                )}
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
+
+export default memo(Header);

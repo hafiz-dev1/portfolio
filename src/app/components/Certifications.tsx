@@ -1,8 +1,8 @@
 // src/app/components/Certifications.tsx
 "use client";
 
-import { useState, useMemo } from "react";
-import { certifications } from "@/app/data"; // Pastikan path ini sesuai
+import { useState, useMemo, useCallback, memo } from "react";
+import { certifications } from "@/app/data";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
@@ -12,26 +12,24 @@ import {
   PaginationItem,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"; // Pastikan path ini sesuai
+} from "@/components/ui/pagination";
 
-// PERBAIKAN 1: Optimalkan jumlah item per halaman agar sesuai dengan grid
-const ITEMS_PER_PAGE = 6; // Mengubah dari 8 menjadi 6 untuk grid yang lebih rapi (2x3 atau 3x2)
+const ITEMS_PER_PAGE = 6;
 
-// PERBAIKAN 2: Sesuaikan parsing tanggal untuk format bahasa Inggris
+const MONTH_MAP: { [key: string]: number } = {
+  Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+  Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11,
+};
+
 const parseDate = (dateStr: string): Date => {
-  const monthMap: { [key: string]: number } = {
-    Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, 
-    Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11,
-  };
-  // Asumsikan format "Issued: May 2025" atau "May 2025"
   const cleanedDateStr = dateStr.replace("Issued: ", "").replace("Diperoleh: ", "");
   const parts = cleanedDateStr.split(" ");
-  const month = monthMap[parts[0]];
+  const month = MONTH_MAP[parts[0]];
   const year = parseInt(parts[1], 10);
   return new Date(year, month);
 };
 
-export default function Certifications() {
+function Certifications() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const sortedCertifications = useMemo(() => {
@@ -47,13 +45,15 @@ export default function Certifications() {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentCertifications = sortedCertifications.slice(startIndex, endIndex);
 
-  const handlePrevious = () => {
+  const handlePrevious = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
     setCurrentPage((prev) => Math.max(prev - 1, 1));
-  };
+  }, []);
 
-  const handleNext = () => {
+  const handleNext = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
-  };
+  }, [totalPages]);
 
   return (
     <section
@@ -66,7 +66,6 @@ export default function Certifications() {
         </h2>
 
         {/* Grid Responsif */}
-        {/* PERBAIKAN 3: Hapus min-h untuk tinggi yang lebih natural */}
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {currentCertifications.map((cert, index) => (
             <motion.a
@@ -74,7 +73,6 @@ export default function Certifications() {
               href={cert.credentialUrl}
               target="_blank"
               rel="noopener noreferrer"
-              // PERBAIKAN 4: Tata letak kartu yang lebih adaptif di layar kecil
               className="flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left w-full gap-4 p-5 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-blue-500 group"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -114,10 +112,7 @@ export default function Certifications() {
               <PaginationItem>
                 <PaginationPrevious
                   href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handlePrevious();
-                  }}
+                  onClick={handlePrevious}
                   className={`${
                     currentPage === 1 ? "pointer-events-none opacity-50" : ""
                   }`}
@@ -131,10 +126,7 @@ export default function Certifications() {
               <PaginationItem>
                 <PaginationNext
                   href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNext();
-                  }}
+                  onClick={handleNext}
                   className={`${
                     currentPage === totalPages
                       ? "pointer-events-none opacity-50"
@@ -149,3 +141,5 @@ export default function Certifications() {
     </section>
   );
 }
+
+export default memo(Certifications);

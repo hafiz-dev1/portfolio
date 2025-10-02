@@ -1,7 +1,7 @@
 // src/app/components/ProjectCard.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, memo, useCallback } from "react";
 import { Project } from "@/app/data";
 import {
   Dialog,
@@ -17,13 +17,18 @@ interface ProjectCardProps {
   project: Project;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
-  const [activeTab, setActiveTab] = useState<"caseStudy" | "screenshots">(
-    "caseStudy"
-  );
+function ProjectCard({ project }: ProjectCardProps) {
+  const [activeTab, setActiveTab] = useState<"caseStudy" | "screenshots">("caseStudy");
+
+  const handleDialogOpenChange = useCallback(() => {
+    setActiveTab('caseStudy');
+  }, []);
+
+  const setToCaseStudy = useCallback(() => setActiveTab("caseStudy"), []);
+  const setToScreenshots = useCallback(() => setActiveTab("screenshots"), []);
 
   return (
-    <Dialog onOpenChange={() => setActiveTab('caseStudy')}>
+    <Dialog onOpenChange={handleDialogOpenChange}>
       <DialogTrigger asChild>
         {/* Trigger Card */}
         <div className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-lg p-6 flex flex-col h-full cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
@@ -51,7 +56,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </DialogTrigger>
 
       {/* Dialog Modal */}
-      {/* PERBAIKAN 1: Tambahkan flexbox dan batasan tinggi pada modal */}
       <DialogContent className="w-[95vw] max-w-5xl bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-xl flex flex-col max-h-[90vh]">
         <DialogHeader>
           <DialogTitle className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">{project.title}</DialogTitle>
@@ -60,7 +64,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {/* Tab Navigation */}
         <div className="flex-shrink-0 flex border-b border-gray-200 dark:border-gray-700 mb-6">
           <button
-            onClick={() => setActiveTab("caseStudy")}
+            onClick={setToCaseStudy}
             className={`px-4 py-2 font-semibold text-sm transition-colors duration-200 ${
               activeTab === "caseStudy"
                 ? "text-blue-600 border-b-2 border-blue-600"
@@ -70,7 +74,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             Case Study
           </button>
           <button
-            onClick={() => setActiveTab("screenshots")}
+            onClick={setToScreenshots}
             className={`px-4 py-2 font-semibold text-sm transition-colors duration-200 ${
               activeTab === "screenshots"
                 ? "text-blue-600 border-b-2 border-blue-600"
@@ -168,3 +172,5 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     </Dialog>
   );
 }
+
+export default memo(ProjectCard);
