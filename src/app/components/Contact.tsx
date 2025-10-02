@@ -77,9 +77,9 @@ function Contact() {
               </motion.a>
 
               {/* Additional Info */}
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+              {/* <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
                 I typically respond within 24 hours
-              </p>
+              </p> */}
             </div>
           </motion.div>
 
@@ -92,7 +92,7 @@ function Contact() {
             className="text-center mt-12"
           >
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Or find me on social media
+              Or find me on social media!
             </p>
             <div className="flex justify-center gap-4">
               <a
