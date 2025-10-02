@@ -93,6 +93,7 @@ export const projects: Project[] = [
     screenshots: [
       '/projects/siap/ss1.png',
       '/projects/siap/ss2.png',
+      '/projects/siap/ss3.png',
     ],
     technologies: ['Next.js', 'PostgreSQL', 'Prisma', 'TypeScript', 'Tailwind CSS'],
     githubLink: 'https://github.com/hafiz-dev1/siap-tik-polda',
