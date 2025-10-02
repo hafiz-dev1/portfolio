@@ -49,7 +49,7 @@ function Experience() {
 
               {/* Content Card - Enhanced */}
               <motion.div
-                className={`bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 w-full md:w-[45%] border border-gray-100 dark:border-gray-700 ${
+                className={`bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6 md:p-8 pl-14 md:pl-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 w-full md:w-[45%] border border-gray-100 dark:border-gray-700 ${
                   index % 2 === 0 ? "md:ml-12" : "md:mr-12"
                 }`}
                 whileHover={{ scale: 1.02, y: -5 }}
